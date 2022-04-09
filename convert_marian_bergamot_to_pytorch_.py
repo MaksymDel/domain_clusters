@@ -29,24 +29,12 @@ from torch import nn
 from transformers import MarianConfig, MarianMTModel, MarianTokenizer
 
 
-def remove_suffix(text: str, suffix: str):
-    if text.endswith(suffix):
-        return text[: -len(suffix)]
-    return text  # or whatever
-
-
-def remove_prefix(text: str, prefix: str):
-    if text.startswith(prefix):
-        return text[len(prefix) :]
-    return text  # or whatever
-
-
 def convert_encoder_layer(opus_dict, layer_prefix: str, converter: dict):
     sd = {}
     for k in opus_dict:
         if not k.startswith(layer_prefix):
             continue
-        stripped = remove_prefix(k, layer_prefix)
+        stripped = k.removeprefix(layer_prefix)
         v = opus_dict[k].T  # besides embeddings, everything must be transposed.
         sd[converter[stripped]] = torch.tensor(v).squeeze()
     return sd
@@ -305,7 +293,7 @@ class OpusState:
 
     def sub_keys(self, layer_prefix):
         return [
-            remove_prefix(k, layer_prefix)
+            k.removeprefix(layer_prefix)
             for k in self.state_dict
             if k.startswith(layer_prefix)
         ]
