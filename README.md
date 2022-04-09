@@ -2,12 +2,9 @@
 
 This repositiory implements clustering pipeline from [Translation Transformers Rediscover Inherent Data Domains](https://aclanthology.org/2021.wmt-1.65.pdf).
 
-## Install
+## Setup
 
 ```bash
-module load any/python/3.8.3-conda
-module load cuda/11.3.1
-
 conda create -n dc python=3.9
 conda activate dc
 pip install -r requirements.txt
