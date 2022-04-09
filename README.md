@@ -69,7 +69,7 @@ python run_clustering.py \
 ```
 
 
-### Step 4: cite us =)
+## Citation
 
 ```bibtex
 @inproceedings{del-etal-2021-translation,
