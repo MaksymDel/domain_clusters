@@ -86,13 +86,12 @@ if __name__ == "__main__":
         "--batch-size", type=int, default=1000, help="Path to marian model file"
     )
     parser.add_argument(
-        "--layer-num", type=int, default=4, help="Layer to extract embeddigns from"
+        "--layer-num", type=int, default=4, help="Layer to extract embeddings from"
     )
     parser.add_argument(
         "--gpu",
-        type=bool,
-        default=False,
-        help="Either to use GPU for batched dataset encoding",
+        action='store_true',
+        help="Whether to use GPU for batched dataset encoding",
     )
     parser.add_argument(
         "--out-filename", type=str, help="Path to file to save embeddings in npz format"
