@@ -1,6 +1,6 @@
-# Automatic Domains for Bertgamot
+# Automatic Domains for Bergamot
 
-This repositiory implements clustering pipeline from [Translation Transformers Rediscover Inherent Data Domains](https://aclanthology.org/2021.wmt-1.65.pdf).
+This repository implements clustering pipeline from [Translation Transformers Rediscover Inherent Data Domains](https://aclanthology.org/2021.wmt-1.65.pdf).
 
 ## Setup
 
