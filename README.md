@@ -46,6 +46,8 @@ python extract_sentence_representations.py \
 
 ### Step 3: train k-means model and get cluster labels
 
+#### Small dataset
+
 ```bash
 
 # in: serialized sentence embeddings file
@@ -64,7 +66,9 @@ python run_clustering.py \
 
 ```
 
-### New: train mini-batch k-means on a chanked datasets (for large dataset) for a specified number of epochs
+#### Big chunked dataset
+
+This will train mini-batch k-means on a chanked dataset for a specified number of epochs
 
 ```bash
 # in: comma-separated serialized sentence embeddings files
@@ -78,7 +82,6 @@ python run_clustering_chunked.py \
             --verbose 0 \
             --random-state 42
 ```
-
 
 ## Citation
 
