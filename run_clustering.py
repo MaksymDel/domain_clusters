@@ -40,7 +40,7 @@ if __name__ == "__main__":
         help="Path to the file with sentence representations",
     )
     parser.add_argument(
-        "--out-file-model", type=str, help="Path to file to save kmeans model"
+        "--out-file-model", type=str, help="Path to file to save k-means model"
     )
     parser.add_argument(
         "--out-file-labels",
@@ -48,7 +48,7 @@ if __name__ == "__main__":
         help="Path to file to save cluster labels for dataset",
     )
     parser.add_argument(
-        "--n-clusters", type=int, default=8, help="Number of clusters of k-means"
+        "--n-clusters", type=int, default=8, help="Number of clusters for k-means"
     )
     parser.add_argument(
         "--n_init", type=int, default=10, help="Number of random restarts of k-means"
@@ -57,13 +57,13 @@ if __name__ == "__main__":
         "--max-iter",
         type=int,
         default=300,
-        help="Maximum number of iterations of the k-means algorithm for a single run.",
+        help="Maximum number of iterations of the k-means algorithm for a single run",
     )
     parser.add_argument(
         "--batched",
         type=bool,
         default=False,
-        help="Either to run batched k-means model",
+        help="Whether to run batched k-means model",
     )
     parser.add_argument(
         "--batch-size",
@@ -75,13 +75,13 @@ if __name__ == "__main__":
         "--max-no-improvement-size",
         type=int,
         default=10,
-        help="Patience for batched kmneas",
+        help="Patience for batched k-means",
     )
     parser.add_argument(
-        "--verbose", type=int, default=0, help="Random state for intializations"
+        "--verbose", type=int, default=0, help="Verbosity level for sklearn KMeans"
     )
     parser.add_argument(
-        "--random-state", type=int, default=42, help="Random state for intializations"
+        "--random-state", type=int, default=42, help="Random state for initializations"
     )
     args = parser.parse_args()
 
