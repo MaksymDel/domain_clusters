@@ -58,11 +58,25 @@ python run_clustering.py \
             --n-clusters 4 \
             --n_init 10 \
             --max-iter 300\
-            --batch-size 1024 \
             --max-no-improvement-size 10 \
             --verbose 0 \
-            --random-state 42 # --batched
+            --random-state 42
 
+```
+
+### New: train mini-batch k-means on a chanked datasets (for large dataset) for a specified number of epochs
+
+```bash
+# in: comma-separated serialized sentence embeddings files
+# out: k-means model, cluster ids for dataset 
+python run_clustering_chunked.py \
+            --embedded-chunk-paths artifacts/domain_clusters/dataset_embedded.npz,artifacts/domain_clusters/dataset_embedded.npz \
+            --out-file-model artifacts/domain_clusters/kmeans_model.dump \
+            --out-file-labels artifacts/domain_clusters/cluster_labels.txt \
+            --n-clusters 4 \
+            --num-epochs 30 \
+            --verbose 0 \
+            --random-state 42
 ```
 
 
