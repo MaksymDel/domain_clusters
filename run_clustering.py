@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 import numpy as np
-from joblib import dump
+from joblib import dump, load
 from sklearn.cluster import KMeans, MiniBatchKMeans
 
 
@@ -41,6 +41,12 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--out-file-model", type=str, help="Path to file to save k-means model"
+    )
+    parser.add_argument(
+        "--predict-with-model", 
+        type=str, 
+        help="Path to file of already trained k-means model; in this case script only runs labeling",
+        default=None,
     )
     parser.add_argument(
         "--out-file-labels",
@@ -86,12 +92,20 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     features = np.load(args.embedded_dataset_path)["arr_0"]
-    model = train_kmeans(features=features, args=args)
 
-    Path(os.path.dirname(args.out_file_model)).mkdir(parents=True, exist_ok=True)
-    dump(model, args.out_file_model)
-    print(f"Saved model to {args.out_file_model}")
+    if predict_with_model is not None:
+        model = load('filename.joblib')     
+        labels = model.predict(features)
 
+    else:
+        model = train_kmeans(features=features, args=args)
+        labels = model.labels_
+        
+        Path(os.path.dirname(args.out_file_model)).mkdir(parents=True, exist_ok=True)
+        dump(model, args.out_file_model)
+        print(f"Saved model to {args.out_file_model}")
+
+    
     Path(os.path.dirname(args.out_file_labels)).mkdir(parents=True, exist_ok=True)
-    np.savetxt(args.out_file_labels, model.labels_, fmt="%i")
+    np.savetxt(args.out_file_labels, labels, fmt="%i")
     print(f"Saved labels to {args.out_file_labels}")
