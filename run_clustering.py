@@ -94,7 +94,7 @@ if __name__ == "__main__":
     features = np.load(args.embedded_dataset_path)["arr_0"]
 
     if predict_with_model is not None:
-        model = load('filename.joblib')     
+        model = load(predict_with_model)     
         labels = model.predict(features)
 
     else:
