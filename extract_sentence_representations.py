@@ -54,13 +54,13 @@ def masked_mean(
     return value_sum / value_count.float().clamp(min=tiny_value_of_dtype(torch.float))
 
 
-def extract_sent_reps(hf_model_dir, txt_dataset_path, batch_size, layer_num, gpu):
+def extract_sent_reps(hf_model_dir, txt_dataset_path, batch_size, layer_num, gpu, caching_dir):
     model = MarianMTModel.from_pretrained(hf_model_dir).model.encoder
     model.eval()
     if gpu:
         model.cuda()
     tokenizer = MarianTokenizer.from_pretrained(hf_model_dir)
-    dataset = load_dataset("text", data_files=txt_dataset_path, split="train")
+    dataset = load_dataset("text", data_files=txt_dataset_path, split="train", cache_dir=caching_dir)
     dataset = dataset.map(
         function=encode_batch,
         fn_kwargs={
@@ -96,6 +96,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--out-filename", type=str, help="Path to file to save embeddings in npz format"
     )
+    parser.add_argument(
+            "--caching-dir", type=str, help="Path to caching directory for HuggingFace",
+            default="~/.cache/huggingface/datasets"
+    )
     args = parser.parse_args()
 
     features = extract_sent_reps(
@@ -104,6 +108,7 @@ if __name__ == "__main__":
         batch_size=args.batch_size,
         layer_num=args.layer_num,
         gpu=args.gpu,
+        caching_dir=args.caching_dir
     )
 
     Path(os.path.dirname(args.out_filename)).mkdir(parents=True, exist_ok=True)
