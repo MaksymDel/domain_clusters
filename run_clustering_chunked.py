@@ -32,10 +32,10 @@ if __name__ == "__main__":
         help="For how many epochs to run the k-means algorithm?",
     )
     parser.add_argument(
-        "--verbose", type=int, default=0, help="Random state for intializations"
+        "--verbose", type=int, default=0, help="Verbosity"
     )
     parser.add_argument(
-        "--random-state", type=int, default=42, help="Random state for intializations"
+        "--random-state", type=int, default=42, help="Random state"
     )
     args = parser.parse_args()
 
