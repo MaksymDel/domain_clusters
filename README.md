@@ -1,6 +1,6 @@
-# Automatic Domains for Bertgamot
+# Automatic Domains for Bergamot
 
-This repositiory implements clustering pipeline from [Translation Transformers Rediscover Inherent Data Domains](https://aclanthology.org/2021.wmt-1.65.pdf).
+This repository implements clustering pipeline from [Translation Transformers Rediscover Inherent Data Domains](https://aclanthology.org/2021.wmt-1.65.pdf).
 
 ## Setup
 
@@ -74,7 +74,7 @@ This will train mini-batch k-means on a chanked dataset for a specified number o
 # in: comma-separated serialized sentence embeddings files
 # out: k-means model, cluster ids for dataset 
 python run_clustering_chunked.py \
-            --embedded-chunk-paths artifacts/domain_clusters/dataset_embedded.npz,artifacts/domain_clusters/dataset_embedded.npz \
+            --embedded-chunk-paths artifacts/domain_clusters/dataset_embedded.npz artifacts/domain_clusters/dataset_embedded.npz \
             --out-file-model artifacts/domain_clusters/kmeans_model.dump \
             --out-file-labels artifacts/domain_clusters/cluster_labels.txt \
             --n-clusters 4 \
