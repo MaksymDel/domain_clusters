@@ -11,8 +11,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--embedded-chunk-paths",
-        type=str,
-        help="Comma-separated paths to the files that contain chunks of the dataset with sentence representations",
+        type=str, nargs="+",
+        help="Paths to files containing chunks of the dataset with sentence representations",
     )
     parser.add_argument(
         "--out-file-model", type=str, help="Path to file to save kmeans model"
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     # fit
     for i_epoch in range(args.num_epochs):
         print(f"{i_epoch=}")
-        for subdataset_path in args.embedded_chunk_paths.split(","):
+        for subdataset_path in args.embedded_chunk_paths:
             features = np.load(subdataset_path)["arr_0"]
             model.partial_fit(features)
             del features
@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
     # label
     all_labels = []
-    for subdataset_path in args.embedded_chunk_paths.split(","):
+    for subdataset_path in args.embedded_chunk_paths:
         features = np.load(subdataset_path)["arr_0"]
         all_labels.extend(model.predict(features))
         del features
